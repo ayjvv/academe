@@ -1,0 +1,38 @@
+jQuery(function($) {
+
+
+  $(".hover-link").parent('a').remove();
+
+  // 게시판 > 언론보도
+  $(".board-blank .bbsnewf5").each(function() {
+    var content = $(this).find('.gallery_etc').hide().text().replace('[linkurl : ', '').replace(']', '');
+    $(this).find('table td:first').append(`<a href="${content}" target="_blank"><div class="bg-overlay hover-link"><div class="bg-overlay-content"><i class="bi-link-45deg h2 mb-0"></i></div></div></a>`);
+  });
+
+  // 게시판 > 언론보도 > 추출
+  $(".board-blank-output .owl-item").each(function() { var content = $(this).find('.board_output_gallery_etc').parent().hide().end().text(); $(this).find('table td:first').append('<a href="' + content + '" target="_blank"><div class="bg-overlay hover-link"><div class="bg-overlay-content text-dark h-text-light"><i class="bi-link-45deg h2 mb-0"></i></div></div></a>'); });
+
+  // 게시판 > 영상미디어
+  $(".board-video .bbsnewf5").each(function() {
+    var content = $(this).find('.gallery_etc').hide().text().replace('[linkurl : ', '').replace(']', '');
+    $(this).find('table td:first').append(`<a href="${content}" target="_blank"><div class="bg-overlay hover-link"><div class="bg-overlay-content text-dark h-color-youtube"><i class="bi-youtube h2 mb-0"></i></div></div></a>`);
+  });
+
+  // 게시판 > 영상미디어 > 추출
+  $(".board-video-output .owl-item").each(function() { var content = $(this).find('.board_output_gallery_etc').parent().hide().end().text(); $(this).find('table td:first').append('<a href="' + content + '" target="_blank"><div class="bg-overlay hover-link"><div class="bg-overlay-content text-dark h-color-youtube"><i class="bi-youtube h2 mb-0"></i></div></div></a>'); });
+
+  // 게시판 매장찾기
+  $(".board-store tr").addClass('list-store').removeAttr('onclick');
+  $(".board-store .list-store").each(function() {
+    var mapsrc = $(this).find('.bbsetc_add5').text();
+    $(this).find(".bbsetc_add5").empty().append(`<a href="${mapsrc}" target="_blank"><img width="24" height="24" src="https://img.icons8.com/external-kmg-design-glyph-kmg-design/32/000000/external-pin-maps-navigation-kmg-design-glyph-kmg-design-1.png"></a>`);
+  });
+
+  // 공백제거
+  $(".table-nbsp").html((_, html) => html.replace(/&nbsp;/g, ''));
+
+  // 추출 썸네일이미지 이벤트
+  $(".board-hover-event .board_output_gallery_img img").addClass("all-ts border border-light-subtitle border-2 h-border-color h-shadow");
+  $(".board_output_gallery_img br").remove();
+
+});

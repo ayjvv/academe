@@ -1,0 +1,55 @@
+jQuery(function($) {
+  // Category
+  var $sulMenu = $(".sul_menu");
+  $sulMenu.addClass('cate_menu')
+    .find('font').removeAttr('style').end()
+    .find('img').addClass('active');
+  // From mail
+  $(".table-formmail td.formmail_title_bgcolor, .table td.board_bgcolor, .table td.att_title").each(function(index) {
+    $(this).find("font, span").removeAttr('style');
+  });
+  $('.table-formmail').find('textarea').parent().parent().addClass('w-100');
+  // Board
+  $("#border[name='password']").attr("size", "50");
+  // Styling adjustments
+  $(".tableA-list td[width='26']").css("font-size", "0");
+  $(".tableA-write table.board, .tableA-modify table.board, .tableB-write table.board, .tableB-modify table.board, .tableC-write table.board, .tableC-modify table.board").addClass("innerTable");
+  // Comment
+  $(".table-comment, .commentTable table, .table-comment-write").children().addClass("commentTable");
+  $(".commentTable table").addClass("commentInner");
+  // Buttons
+  $(".bbs-btn-write a, .bbs-btn-list a").addClass('btn btn-dark').empty().append('글쓰기');
+  $(".bbs-btn-cancel").addClass('btn btn-outline-secondary').empty().append('취소');
+  $(".bbs-btn-confirm").addClass('btn btn-dark').prop({
+    'type': 'submit',
+    'value': '확인'
+  });
+  $('.bbs-btn-lead-wrap').find('a > img[src$="write.gif"]').parent().addClass('btn-lead-write btn btn-dark');
+  $('a.btn-lead-write').empty().append('글쓰기');
+  $('.bbs-btn-lead-wrap').find('a > img[src$="delete.gif"]').parent().addClass('btn-lead-delete btn btn-outline-secondary');
+  $('a.btn-lead-delete').empty().append('삭제');
+  $('.bbs-btn-lead-wrap').find('a > img[src$="modify.gif"]').parent().addClass('btn-lead-modify btn btn-outline-secondary');
+  $('a.btn-lead-modify').empty().append('수정');
+  $('.bbs-btn-lead-wrap').find('a > img[src$="list.gif"]').parent().addClass('btn-lead-list btn btn-dark');
+  $('a.btn-lead-list').empty().append('목록');
+  $('.bbs-btn-lead-wrap').find('a > img[src$="next.gif"]').parent().addClass('btn-lead-next btn btn-outline-secondary');
+  $('a.btn-lead-next').empty().append('다음');
+  $('.bbs-btn-lead-wrap').find('a > img[src$="prev.gif"]').parent().addClass('btn-lead-prev btn btn-outline-secondary');
+  $('a.btn-lead-prev').empty().append('이전');
+  $('.bbs-btn-lead-wrap').find('a > img[src$="move.gif"]').parent().addClass('btn-lead-move btn btn-secondary');
+  $('a.btn-lead-move').empty().append('이동');
+  $('.bbs-btn-lead-wrap').find('a > img[src$="copy.gif"]').parent().addClass('btn-lead-copy btn btn-secondary');
+  $('a.btn-lead-copy').empty().append('복사');
+  $('.bbs-btn-lead-wrap').find('a > img[src$="reply.gif"]').parent().addClass('btn-lead-reply btn btn-secondary');
+  $('a.btn-lead-reply').empty().append('답변');
+  $('.commentWrite').find('input[src$="comment_write.gif"]').empty().addClass('btn-lead-comment btn btn-secondary');
+  $(".btn-lead-comment").prop({
+    'type': 'submit',
+    'value': '확인'
+  });
+  // Comment Write
+  $('.commentWrite').find('input[src$="comment_write.gif"]').empty().addClass('btn-lead-comment btn btn-dark').prop({
+    'type': 'submit',
+    'value': '확인'
+  });
+});

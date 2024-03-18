@@ -1,0 +1,203 @@
+jQuery(function($) {
+
+// PC 네비게이션 바
+$(".nav_box").on('mouseenter focusin', function() {
+  $(".twoDBg").slideDown(300);
+  $(".nav_box li .twoD").slideDown(300);
+  $(".header_wrap").addClass("navbar-scroll");
+});
+
+$(".nav_box").on('mouseleave', function() {
+  $(".twoDBg, .nav_box li .twoD").stop().slideUp(200);
+  if ($(document).scrollTop() <= 50) {
+    $(".header_wrap").removeClass("navbar-scroll");
+  }
+});
+
+// 서브메뉴 활성화
+var currentURL = location.href.toLowerCase();
+$('.nav-active>li>a').each(function() {
+  if (currentURL.indexOf(this.href.toLowerCase()) > -1) {
+    $(".nav-active>li>a.active").removeClass("active");
+    $(this).addClass("active");
+  }
+});
+
+$('li>a.active').parents().each(function() {
+  if ($(this).is('li>a')) {
+    $(this).addClass("active");
+  }
+});
+
+// sample > contact > wide > formmail
+$("#formmail-wide input[name='add1']").attr('placeholder', '담당자명');
+$("#formmail-wide input[name='add2']").attr('placeholder', '연락처');
+$("#formmail-wide input[name='add3']").attr('placeholder', '이메일');
+$("#formmail-wide textarea[name='add4']").attr('placeholder', '문의내용');
+
+// 퀵메뉴
+$("#formmail-bottom input.formmail_border[name='add1']").attr('placeholder', '성함');
+$("#formmail-bottom input.formmail_border[name='add2']").attr('placeholder', '연락처');
+$("#formmail-bottom input.formmail_border[name='add3']").attr('placeholder', '내용');
+// $("#formmail-bottom input.formmail_border[name='add4']").attr('placeholder', '문의내용');
+// $("#formmail-bottom textarea.formmail_textarea_style[name='description1']").attr('placeholder', '문의내용');
+
+// 메뉴바 스크롤 업
+var lastScrollTop = 0;
+window.addEventListener("scroll", function(event) {
+  var st = jQuery(this).scrollTop();
+  if (st > lastScrollTop) {
+    jQuery('#header.sticky-on-scrollup').removeClass('show-sticky-onscroll'); // Down Scroll
+  } else {
+    jQuery('#header.sticky-on-scrollup').addClass('show-sticky-onscroll'); // Up Scroll
+  }
+  lastScrollTop = st;
+});
+
+}); // jQuery END
+
+// 기업형 > 메인
+jQuery(window).on('pluginCarouselReady', function() {
+  jQuery('#oc-main').owlCarousel({
+    items: 2,
+    margin: 25,
+    nav: true,
+    navText: ['<span class="h-color"><i class="bi bi-arrow-left"></i></span>', '<span class="h-color">&#10230;</span>'],
+    dots: false,
+    responsive: {
+      576: { items: 1 },
+      768: { items: 1 }
+    },
+  });
+});
+
+// 기업형 > 사업소개 A
+jQuery(window).on('pluginCarouselReady', function() {
+  jQuery('#oc-review').owlCarousel({
+    items: 1,
+    margin: 25,
+    loop: true,
+    autoplay: 3000,
+    nav: true,
+    navText: ['<span class="h-color">&#10229;</span>', '<span class="h-color">&#10230;</span>'],
+    dots: false,
+    responsive: {
+      576: { items: 2 },
+      768: { items: 4 }
+    },
+  });
+});
+
+// 기업형 > 제품소개 B
+jQuery(document).on("click", "#portfolio .portfolio-item .portfolio-image>a", function() {
+  var isDisplay = jQuery(this).children(".hover").css("display");
+  if (isDisplay == "block") {
+    jQuery(this).children(".hover").stop().fadeOut();
+    jQuery(this).parent().removeClass('on');
+  } else {
+    jQuery(".hover").stop().fadeOut();
+    jQuery(this).children(".hover").stop().fadeToggle();
+    jQuery(".menu_list>ul>li").removeClass('on');
+    jQuery(this).parent().addClass('on');
+  }
+  return false;
+});
+
+// 자주하는 질문 필터값
+jQuery(document).ready(function() {
+  var $faqItems = jQuery('#faqs .faq');
+  if (window.location.hash != '') {
+    var faqFilterHash = window.location.hash.split('#')[1];
+    if ($faqItems.hasClass(faqFilterHash)) {
+      jQuery('.customjs.grid-filter li').removeClass('activeFilter');
+      jQuery('[data-filter=".' + faqFilterHash + '"]').parent('li').addClass('activeFilter');
+      var faqSelector = '.' + faqFilterHash;
+      $faqItems.css('display', 'none');
+      if (faqSelector != 'all') {
+        jQuery(faqSelector).fadeIn(500);
+      } else {
+        $faqItems.fadeIn(500);
+      }
+    }
+  }
+
+  jQuery('.customjs.grid-filter a').on('click', function() {
+    jQuery('.customjs.grid-filter li').removeClass('activeFilter');
+    jQuery(this).parent('li').addClass('activeFilter');
+    var faqSelector = jQuery(this).attr('data-filter');
+    $faqItems.css('display', 'none');
+    if (faqSelector != 'all') {
+      jQuery(faqSelector).fadeIn(500);
+    } else {
+      $faqItems.fadeIn(500);
+    }
+    return false;
+  });
+});
+
+// 퀵 폼메일
+jQuery(document).ready(function() {
+  var elementParent = jQuery('.floating-contact-wrap');
+  jQuery('.floating-contact-btn').off('click').on('click', function() {
+    elementParent.toggleClass('active');
+  });
+});
+
+
+
+
+// 메인 커스텀
+window.addEventListener('load', function() {
+
+
+  var swiperParent = new Swiper('.main-menu .swiper-parent', {
+    slidesPerView: 1,
+    navigation: {
+      nextEl: ".slider-arrow-right",
+      prevEl: ".slider-arrow-left",
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+        slidesPerView: "auto",
+      }
+    },
+  });
+
+
+  var SwiperTabsContainer = new Swiper('.swiper-tab-container', {
+    loop: true,
+    slidesPerView: 1,
+    autoHeight: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+      autoplayDisableOnInteraction: false
+    },
+    effect: 'fade',
+    fadeEffect: {
+      crossFade: true
+    },
+    longSwipes: true,
+    autoplayDisableOnInteraction: true,
+    on: {
+      activeIndexChange: function(swiper) {
+        var index = swiper.realIndex;
+        jQuery('.swiper-tab-link').removeClass('active');
+        jQuery('.swiper-tab-link').eq(index).addClass('active');
+      }
+    }
+  });
+  jQuery('.swiper-tab-link').on('click', function() {
+    var index = jQuery(this).index();
+    SwiperTabsContainer.slideToLoop(index);
+    jQuery('.swiper-tab-link').removeClass('active');
+    jQuery(this).addClass('active');
+  });
+});
